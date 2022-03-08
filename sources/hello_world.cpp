@@ -1,8 +1,7 @@
 #include <iostream>
 #include <string>
 
-int
-main(int argc, char** argv)
+int main(int argc, char** argv)
 {
   std::string name; // We initialize the name variable of type string
   std::cout << "Input user_name"; // Please enter your username
