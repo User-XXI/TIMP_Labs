@@ -3,9 +3,9 @@
 
 int main(int argc, char** argv)
 {
-    std::string name; // Инициальзируем переменную name типа string
-    std::cout << "Input user_name"; // Просим ввести имя пользователя
-    std::cin >> name; // Запрашиваем значение переменной name из потока ввода вывода
-    std::cout << "Hello world from " << name << std::endl; // Выводим преветствие
+    std::string name; // We initialize the name variable of type string
+    std::cout << "Input user_name"; // Please enter your username
+    std::cin >> name; // We request the value of the variable name from the I/O stream
+    std::cout << "Hello world from " << name << std::endl; // Bringing out the hello
     return 0;
 }
