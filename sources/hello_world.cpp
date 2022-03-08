@@ -9,4 +9,3 @@ int main(int argc, char** argv)
     std::cout << "Hello world from " << name << std::endl; // Выводим преветствие
     return 0;
 }
-
