@@ -1,0 +1,4 @@
+/home/andrey/User-XXI/workspace/projects/lab03/_install/lib/libprint.a
+/home/andrey/User-XXI/workspace/projects/lab03/_install/include/print.hpp
+/home/andrey/User-XXI/workspace/projects/lab03/_install/cmake/print-config.cmake
+/home/andrey/User-XXI/workspace/projects/lab03/_install/cmake/print-config-noconfig.cmake
