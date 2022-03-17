@@ -1,4 +1,4 @@
-# Laboratory work III
+#
 ___
 
 ### Задание 1
@@ -59,25 +59,22 @@ $ edit formatter_ex.cpp
 ```shell
 $ cat > CMakeLists.txt <<EOF
 > cmake_minimum_required(VERSION 3.4)
-> project(formatter_ex_lib)
+> project(lab03_2)
 > 
 > set(CMAKE_CXX_STANDART 11)
 > set(CMAKE_CXX_STANDART_REQUIRED ON)
 > 
-> add_library(formatter_exlib STATIC ${CMAKE_CURRENT_SOURCE_DIR}/formatter_ex.cpp)
->
-> add_executable(formatter_ex ${CMAKE_CURRENT_SOURCE_DIR}/formatter_ex.cpp)
-> 
-> 
-> include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 > include_directories("../formatter_lib")
-> 
-> target_link_libraries(formatter_ex /formatter_lib/formatter)
+>
+> add_library(formatter_ex_lib STATIC ${CMAKE_CURRENT_SOURCE_DIR}/formatter_ex.cpp)
+>
+> target_link_libraries(formatter_ex_lib formatter_lib)
 > EOF
 ```
 
 ```shell
-$ cmake -H. -B_build
+$ cmake -H. -B _build
+
 -- The C compiler identification is GNU 9.4.0
 -- The CXX compiler identification is GNU 9.4.0
 -- Check for working C compiler: /usr/bin/cc
@@ -99,21 +96,12 @@ $ cmake -H. -B_build
 
 ```shell
 $ cmake --build _build
-Scanning dependencies of target formatter_exlib
-[ 25%] Building CXX object CMakeFiles/formatter_exlib.dir/formatter_ex.cpp.o
-[ 50%] Linking CXX static library libformatter_exlib.a
-[ 50%] Built target formatter_exlib
-Scanning dependencies of target formatter_ex
-[ 75%] Building CXX object CMakeFiles/formatter_ex.dir/formatter_ex.cpp.o
-[100%] Linking CXX executable formatter_ex
-/usr/bin/ld: /usr/lib/gcc/x86_64-linux-gnu/9/../../../x86_64-linux-gnu/Scrt1.o: в функции «_start»:
-(.text+0x24): неопределённая ссылка на «main»
-/usr/bin/ld: CMakeFiles/formatter_ex.dir/formatter_ex.cpp.o: в функции «formatter(std::ostream&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)»:
-formatter_ex.cpp:(.text+0x33): неопределённая ссылка на «formatter(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)»
-collect2: error: ld returned 1 exit status
-make[2]: *** [CMakeFiles/formatter_ex.dir/build.make:85: formatter_ex] Ошибка 1
-make[1]: *** [CMakeFiles/Makefile2:78: CMakeFiles/formatter_ex.dir/all] Ошибка 2
-make: *** [Makefile:84: all] Ошибка 2
+
+Scanning dependencies of target formatter_ex_lib
+[ 50%] Building CXX object CMakeFiles/formatter_ex_lib.dir/formatter_ex.cpp.o
+[100%] Linking CXX static library libformatter_ex_lib.a
+[100%] Built target formatter_ex_lib
+
 ```
 
 ### Задание 3
