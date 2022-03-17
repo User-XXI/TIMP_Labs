@@ -1,1 +1,0 @@
-/usr/bin/c++     CMakeFiles/formatter_ex.dir/formatter_ex.cpp.o  -o formatter_ex  libformatter_exlib.a 

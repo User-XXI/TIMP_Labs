@@ -116,6 +116,5 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/formatter_ex.dir/DependInfo.cmake"
-  "CMakeFiles/formatter_exlib.dir/DependInfo.cmake"
+  "CMakeFiles/formatter_ex_lib.dir/DependInfo.cmake"
   )

@@ -4,13 +4,12 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/andrey/User-XXI/workspace/projects/lab03/TIMP_Labs/formatter_ex_lib/formatter_ex.cpp" "/home/andrey/User-XXI/workspace/projects/lab03/TIMP_Labs/formatter_ex_lib/_build/CMakeFiles/formatter_exlib.dir/formatter_ex.cpp.o"
+  "/home/andrey/User-XXI/workspace/projects/lab03/TIMP_Labs/formatter_ex_lib/formatter_ex.cpp" "/home/andrey/User-XXI/workspace/projects/lab03/TIMP_Labs/formatter_ex_lib/_build/CMakeFiles/formatter_ex_lib.dir/formatter_ex.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  "../"
   "../../formatter_lib"
   )
 
