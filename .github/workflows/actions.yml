@@ -24,3 +24,17 @@ jobs:
         run: |
           cmake -H. -B_build
           cmake --build _build
+          
+      - name: Test_formatter_ex_lib
+        working-directory: formatter_ex_lib
+        shell: bash
+        run: |
+          cmake -H. -B_build
+          cmake --build _build
+          
+      - name: Test_hello_world_application
+        working-directory: hello_world_application
+        shell: bash
+        run: |
+          cmake -H. -B_build
+          cmake --build _build
