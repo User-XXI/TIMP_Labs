@@ -1,20 +1,68 @@
-# Лабораторные работы по дисциплине технологии и методы программирования
-*Максимов Андрей*
+[![lab04-actions](https://github.com/User-XXI/TIMP_Labs/actions/workflows/actions.yml/badge.svg?branch=lab04_master)](https://github.com/User-XXI/TIMP_Labs/actions/workflows/actions.yml)
+
+## Laboratory work IV
+
+Данная лабораторная работа посвещена изучению систем непрерывной интеграции на примере сервиса **[GitHub Actions](https://github.com/features/actions)**
+
 ___
-# **Лабораторнная работа №1**
 
-Ветки, созданные для лабораторной работы: `lab01_master`
+Вы продолжаете проходить стажировку в "Formatter Inc." (см [подробности](https://github.com/tp-labs/lab03#Homework)).
 
-*Отчёт в файле **REPORT.md**, находящийся в ветке `lab01_master`.*
+В прошлый раз ваше задание заключалось в настройке автоматизированной системы **CMake**.
 
-# **Лабораторнная работа №2**
+Сейчас вам требуется настроить систему непрерывной интеграции для библиотек и приложений, с которыми вы работали в [прошлый раз](https://github.com/tp-labs/lab03#Homework). Настройте сборочные процедуры на различных платформах:
+* используйте [GitHub Actions](https://github.com/features/actions) для сборки на операционной системе **Linux** с использованием компиляторов **gcc** и **clang**;
+* используйте [AppVeyor](https://www.appveyor.com/) для сборки на операционной системе **Windows**.
 
-Ветки, созданные для лабораторной работы: `lab02_master`, `lab02_patch1`, `lab02_patch2`
+```bash
+$ mkdir .githud
+$ cd .githud
+$ mkdir workflows
+$ touch actions.yml
+```
+Заполняем файл `actions.yml`
 
-*Отчёт в файле **README.md**, находящийся в ветке `lab02_master`.*
-
-# **Лабораторнная работа №3** 
-
-Ветки, созданные для лабораторной работы: `lab03_master`
-
-*Отчёт в файле **README.md**, находящийся в ветке `lab03_master`.*
+```bash
+cat > actions.yml <<EOF
+> name: 'lab04-actions'
+> on:
+>   push:
+>     branches:
+>       - lab04_master
+>      
+> jobs:
+>   build:
+>     runs-on: ubuntu-latest
+>   
+>     steps:      
+>       - name: Git clone
+>         uses: actions/checkout@v1 
+>         
+>       - name: Git checkout
+>         run : git checkout lab04_master
+>         
+>       - name: Git pull
+>         run : git pull origin lab04_master
+>     
+>       - name: Test_formatter_lib
+>         working-directory: formatter_lib
+>         shell: bash
+>         run: |
+>           cmake -H. -B_build
+>           cmake --build _build
+>          
+>       - name: Test_formatter_ex_lib
+>         working-directory: formatter_ex_lib
+>         shell: bash
+>         run: |
+>           cmake -H. -B_build
+>           cmake --build _build
+>          
+>       - name: Test_hello_world_application
+>         working-directory: hello_world_application
+>         shell: bash
+>         run: |
+>           cmake -H. -B_build
+>          cmake --build _build
+> EOF
+```
