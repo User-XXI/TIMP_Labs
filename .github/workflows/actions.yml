@@ -14,6 +14,9 @@ jobs:
         
       - name: Git checkout
         run : git checkout lab04_master
+        
+      - name: Git pull
+        run : git pull origin lab04_master
     
       - name: Test_formatter_lib
         working-directory: formatter_lib
