@@ -1,10 +1,23 @@
 name: 'lab04-actions'
-on: [push]
+on:
+  push:
+    branches:
+      - lab04_master
+      
 jobs:
   build:
     runs-on: ubuntu-latest
   
     steps:
+      - name: Print_Test
+        run : echo "Hello World"
+        
+      - name: Git clone
+        uses: actions/checkout@v1 
+        
+      - name: Git checkout
+        run : git checkout lab04_master
+    
       - name: Test_formatter_lib
         working-directory: formatter_lib
         shell: bash
