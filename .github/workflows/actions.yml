@@ -19,6 +19,5 @@ jobs:
         working-directory: formatter_lib
         shell: bash
         run: |
-          ls -la
           cmake -H. -B_build
           cmake --build _build
