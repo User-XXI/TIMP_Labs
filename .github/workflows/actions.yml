@@ -1,0 +1,14 @@
+name: 'lab04-actions'
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+  
+    steps:
+      - name: Test_formatter_lib
+        working-directory: formatter_lib
+        shell: bash
+        run: |
+          ls
+          cmake -H. -B_build
+          cmake --build _build
