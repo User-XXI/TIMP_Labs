@@ -63,6 +63,6 @@ cat > actions.yml <<EOF
 >         shell: bash
 >         run: |
 >           cmake -H. -B_build
->          cmake --build _build
+>           cmake --build _build
 > EOF
 ```
