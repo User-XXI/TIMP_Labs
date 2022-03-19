@@ -1,0 +1,2 @@
+/usr/bin/ar qc libsolver_application.a  CMakeFiles/solver_application.dir/equation.cpp.o
+/usr/bin/ranlib libsolver_application.a
