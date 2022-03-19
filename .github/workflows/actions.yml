@@ -1,0 +1,27 @@
+name: 'lab05-actions'
+
+language: cpp
+
+on:
+   push:
+     branches:
+       - lab05_master
+
+ jobs:
+   build:
+     runs-on: ubuntu-latest
+addons:
+  apt:
+    sources:
+    - george-edison55-precise-backports
+    packages:
+    - cmake
+    - cmake-data
+before_install:
+- pip install --user cpp-coveralls
+script:
+- cmake -H. -B_build -DBUILD_TESTS=ON
+- cmake --build _build
+- cmake --build _build --target test -- ARGS=--verbose
+after_success:
+- coveralls --root . -E ".*gtest.*" -E ".*CMakeFiles.*"
