@@ -18,6 +18,7 @@ ___
 $ mkdir .githud
 $ cd .githud
 $ mkdir workflows
+$ cd workflows
 $ touch actions.yml
 ```
 Заполняем файл `actions.yml`
