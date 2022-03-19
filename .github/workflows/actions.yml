@@ -8,10 +8,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
   
-    steps:
-      - name: Print_Test
-        run : echo "Hello World"
-        
+    steps:      
       - name: Git clone
         uses: actions/checkout@v1 
         
@@ -22,6 +19,6 @@ jobs:
         working-directory: formatter_lib
         shell: bash
         run: |
-          ls
+          ls -la
           cmake -H. -B_build
           cmake --build _build
