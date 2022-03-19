@@ -1,2 +1,0 @@
-/usr/bin/ar qc libhello_world_application.a  CMakeFiles/hello_world_application.dir/hello_world.cpp.o
-/usr/bin/ranlib libhello_world_application.a

@@ -1,6 +1,0 @@
-/home/andrey/User-XXI/workspace/projects/lab03/TIMP_Labs/solver_application/_build/CMakeFiles/rebuild_cache.dir
-/home/andrey/User-XXI/workspace/projects/lab03/TIMP_Labs/solver_application/_build/CMakeFiles/edit_cache.dir
-/home/andrey/User-XXI/workspace/projects/lab03/TIMP_Labs/solver_application/_build/CMakeFiles/solver_application.dir
-/home/andrey/User-XXI/workspace/projects/lab03/TIMP_Labs/solver_application/_build/CMakeFiles/formatter_ex.dir
-/home/andrey/User-XXI/workspace/projects/lab03/TIMP_Labs/solver_application/_build/CMakeFiles/solver_lib.dir
-/home/andrey/User-XXI/workspace/projects/lab03/TIMP_Labs/solver_application/_build/CMakeFiles/solver.dir
