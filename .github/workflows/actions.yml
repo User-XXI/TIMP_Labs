@@ -1,12 +1,12 @@
 name: 'lab04-actions'
-on: [push, pull_request]
+on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
   
     steps:
       - name: Test_formatter_lib
-        working-directory: ./formatter_lib
+        working-directory: formatter_lib
         shell: bash
         run: |
           ls
