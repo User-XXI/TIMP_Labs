@@ -28,20 +28,6 @@ jobs:
           _build/check
           cmake --build _build --target test -- ARGS=--verbose
       - name: Display coverage
-        uses: ewjoachim/coverage-comment-action@v1
+        uses: romeovs/lcov-reporter-action@v0.2.16
         with:
-
-          # Name of the json file containing badge informations stored in the repo wiki.
-          BADGE_FILENAME: coverage-comment-badge.json
-
-          # If the coverage percentage is above or equal to this value, the badge will be green.
-          MINIMUM_GREEN: 100
-
-          # Same with orange. Below is red.
-          MINIMUM_ORANGE: 70
-
-          # [Advanced] Specify a different template for the comments that will be written on the PR.
-          COMMENT_TEMPLATE: ""
-
-          # [Advanced] Additional args to pass to diff cover (one per line)
-          DIFF_COVER_ARGS: ""
+          lcov-file: ./coverage/lcov.info
