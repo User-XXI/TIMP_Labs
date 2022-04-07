@@ -27,7 +27,3 @@ jobs:
           cmake --build _build --target test
           _build/check
           cmake --build _build --target test -- ARGS=--verbose
-      - name: Display coverage
-        uses: romeovs/lcov-reporter-action@v0.2.16
-        with:
-          lcov-file: ./coverage/lcov.info
