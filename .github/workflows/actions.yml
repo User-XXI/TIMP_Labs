@@ -27,4 +27,11 @@ jobs:
           cmake --build _build --target test
           _build/check
           cmake --build _build --target test -- ARGS=--verbose
-       
+
+      - name: coverage
+
+      - run: |
+         npm install -g yarn
+         yarn install
+         yarn build
+
