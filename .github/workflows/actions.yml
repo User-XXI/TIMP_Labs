@@ -14,15 +14,17 @@ jobs:
         uses: actions/checkout@v1 
         
       - name: Git checkout
-        run : git checkout lab04_master
+        run : git checkout lab05_master
         
       - name: Git pull
-        run : git pull origin lab04_master
+        run : git pull origin lab05_master
     
       - name: Test
         shell: bash
         run: |
-          cmake -H. -B_build
+          cmake -H. -B_build -DBUILD_TESTS=O
           cmake --build _build
+          cmake --build _build --target test
+          _build/check
           cmake --build _build --target test -- ARGS=--verbose
        
