@@ -30,13 +30,6 @@ jobs:
       - name: Display coverage
         uses: ewjoachim/coverage-comment-action@v1
         with:
-          GITHUB_TOKEN: ${{ github.token }}
-
-          # Path and filename of the coverage XML file to analyze.
-          COVERAGE_FILE: "coverage.xml"
-
-          # Whether or not a badge will be generated and stored.
-          BADGE_ENABLED: "true"
 
           # Name of the json file containing badge informations stored in the repo wiki.
           BADGE_FILENAME: coverage-comment-badge.json
