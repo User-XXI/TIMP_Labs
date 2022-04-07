@@ -29,7 +29,7 @@ jobs:
           cmake --build _build --target test -- ARGS=--verbose
 
       - name: Run test & publish code coverage
-        uses: paambaati/codeclimate-action@v2.6.0
+        uses: actions/checkout@v1 
         # Add Code Climate secret key
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
