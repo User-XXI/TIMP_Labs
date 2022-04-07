@@ -13,7 +13,7 @@ target_include_directories(transaction
  PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/banking)
 if(BUILD_TESTS)
   enable_testing()
-  add_subdirectory(third-party/gtest)
+  add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/third-party/gtest)
   file(GLOB ${PROJECT_NAME}_TEST_SOURCES tests/*.cpp)
   add_executable(check ${${PROJECT_NAME}_TEST_SOURCES})
   target_compile_options(check PRIVATE --coverage)
