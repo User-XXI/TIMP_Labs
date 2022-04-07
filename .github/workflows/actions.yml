@@ -46,5 +46,3 @@ jobs:
           github-token: ${{ secrets.github_token }}
           flag-name: run-${{ matrix.test_number }}
           parallel: true
-
-
