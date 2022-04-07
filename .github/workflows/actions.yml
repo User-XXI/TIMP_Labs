@@ -28,7 +28,7 @@ jobs:
           _build/check
           cmake --build _build --target test -- ARGS=--verbose
           
-      - name: Git clone
+      - name: Test cov
       - uses: actions/checkout@master
       - name: Use Node.js 10.x
         uses: actions/setup-node@master
