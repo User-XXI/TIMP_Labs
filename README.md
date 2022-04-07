@@ -1,4 +1,4 @@
-[![lab05-actions](https://github.com/User-XXI/TIMP_Labs/actions/workflows/actions.yml/badge.svg)](https://github.com/User-XXI/TIMP_Labs/actions/workflows/actions.yml)
+[![lab05-actions](https://github.com/User-XXI/TIMP_Labs/actions/workflows/actions.yml/badge.svg?branch=lab05_master)](https://github.com/User-XXI/TIMP_Labs/actions/workflows/actions.yml)
 ## Laboratory work V
 ### *Не завершена*
 
