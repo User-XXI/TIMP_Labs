@@ -27,11 +27,24 @@ jobs:
           cmake --build _build --target test
           _build/check
           cmake --build _build --target test -- ARGS=--verbose
-      - name: npm install, make test-coverage
-        run: |
-          npm install
-          make test-coverage
-      - name: Coveralls
+          
+      - name: Git clone
+      - uses: actions/checkout@master
+      - name: Use Node.js 10.x
+        uses: actions/setup-node@master
+        with:
+          version: 10.x
+
+      - name: npm install
+        run: npm install
+
+      - name: Test ${{ matrix.test_number }}
+        run: make test-coverage-${{ matrix.test_number }}
+      - name: Coveralls Parallel
         uses: coverallsapp/github-action@master
-        with: 
-         github-token: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          github-token: ${{ secrets.github_token }}
+          flag-name: run-${{ matrix.test_number }}
+          parallel: true
+
+
