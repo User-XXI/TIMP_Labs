@@ -56,6 +56,7 @@ $ git commit -m "Created third-party/gtest"
 
 ```sh
 $ cmake -H. -B_build -DBUILD_TESTS=ON
+
 -- The C compiler identification is GNU 9.4.0
 -- The CXX compiler identification is GNU 9.4.0
 -- Check for working C compiler: /usr/bin/cc
@@ -87,6 +88,7 @@ $ cmake -H. -B_build -DBUILD_TESTS=ON
 
 ```sh
 $ cmake --build _build
+
 Scanning dependencies of target account
 [  6%] Building CXX object CMakeFiles/account.dir/banking/Account.cpp.o
 [ 13%] Linking CXX static library libaccount.a
@@ -120,6 +122,7 @@ Scanning dependencies of target check
 
 ```sh
 $ cmake --build _build --target test
+
 Running tests...
 Test project /home/andrey/User-XXI/workspace/projects/TIMP_Labs/_build
     Start 1: check
@@ -133,6 +136,7 @@ Total Test time (real) =   0.00 sec
 
 ```sh
 $ _build/check
+
 Running main() from /home/andrey/User-XXI/workspace/projects/TIMP_Labs/third-party/gtest/googletest/src/gtest_main.cc
 [==========] Running 5 tests from 2 test suites.
 [----------] Global test environment set-up.
@@ -156,7 +160,40 @@ Running main() from /home/andrey/User-XXI/workspace/projects/TIMP_Labs/third-par
 [==========] 5 tests from 2 test suites ran. (0 ms total)
 [  PASSED  ] 5 tests.
 ```
+.yml
+```yml
 
+name: 'lab05-actions'
+
+on:
+   push:
+     branches:
+       - lab05_master
+      
+jobs:
+  build:
+    runs-on: ubuntu-latest
+  
+    steps:      
+      - name: Git clone
+        uses: actions/checkout@v1 
+        
+      - name: Git checkout
+        run : git checkout lab05_master
+        
+      - name: Git pull
+        run : git pull origin lab05_master
+    
+      - name: Test
+        shell: bash
+        run: |
+          cmake -H. -B_build -DBUILD_TESTS=O
+          cmake --build _build
+          cmake --build _build --target test
+          _build/check
+          cmake --build _build --target test -- ARGS=--verbose
+       
+```
 ### Задание
 1. Создайте `CMakeList.txt` для библиотеки *banking*.
 2. Создайте модульные тесты на классы `Transaction` и `Account`.
