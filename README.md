@@ -1,4 +1,5 @@
 [![lab05-actions](https://github.com/User-XXI/TIMP_Labs/actions/workflows/actions.yml/badge.svg)](https://github.com/User-XXI/TIMP_Labs/actions/workflows/actions.yml)
+[![Coverage Status](https://coveralls.io/repos/github/User-XXI/TIMP_Labs/badge.svg?branch=main)](https://coveralls.io/github/User-XXI/TIMP_Labs?branch=main)
 ## Laboratory work V
 
 
