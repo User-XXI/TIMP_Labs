@@ -1,0 +1,37 @@
+
+name: 'lab05-actions'
+
+on:
+   push:
+     branches:
+       - lab05_master
+      
+jobs:
+  build:
+    runs-on: ubuntu-latest
+  
+    steps:      
+      - name: Git clone
+        uses: actions/checkout@v1 
+        
+      - name: Git checkout
+        run : git checkout lab05_master
+        
+      - name: Git pull
+        run : git pull origin lab05_master
+    
+      - name: Test
+        shell: bash
+        run: |
+          cmake -H. -B_build -DBUILD_TESTS=O
+          cmake --build _build
+          cmake --build _build --target test
+          _build/check
+          cmake --build _build --target test -- ARGS=--verbose
+       
+      - name: Coveralls
+        uses: coverallsapp/github-action@master
+        with:
+          name: code-coverage-report
+          path: ./lcov.info
+          github-token: ${{ secrets.GITHUB_TOKEN }}
