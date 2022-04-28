@@ -20,6 +20,13 @@ jobs:
       - name: Git pull
         run : git pull origin lab05_master
     
+      - name: Install_1
+        uses: action/setup-node@master
+        with: 
+           version: 10.x
+           
+      - name: Install_npm
+        run: npm install
 
       - name: Install_lcov
         shell: bash
