@@ -20,6 +20,7 @@ jobs:
       - name: Git pull
         run : git pull origin lab05_master
     
+      - uses: action/checkout@master
       - name: Install_1
         uses: action/setup-node@master
         with: 
