@@ -20,17 +20,15 @@ jobs:
       - name: Git pull
         run : git pull origin lab05_master
     
-      - name: Test
+
+      - name: Install_lcov
         shell: bash
-        run: |
-          cmake -H. -B_build -DBUILD_TESTS=O
-          cmake --build _build
-          cmake --build _build --target test
-          _build/check
-          cmake --build _build --target test -- ARGS=--verbose
-       
+        run: | 
+            apt install lcov
+      
       - name: Coveralls
         uses: coverallsapp/github-action@master
         with:
           name: code-coverage-report
+          path: coverage/lcov.info
           github-token: ${{ secrets.GITHUB_TOKEN }}
