@@ -26,7 +26,6 @@ jobs:
         with:
           node-version: 14
       - run: npm install
-      - run: npm test
 
       - name: Install_lcov
         shell: bash
