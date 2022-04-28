@@ -1,10 +1,10 @@
 
-name: 'lab05-actions'
+name: 'lab06-actions'
 
 on:
    push:
      branches:
-       - lab05_master
+       - lab06_master
       
 jobs:
   build:
