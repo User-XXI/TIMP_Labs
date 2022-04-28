@@ -20,14 +20,13 @@ jobs:
       - name: Git pull
         run : git pull origin lab05_master
     
+
       - uses: actions/checkout@v3
-      - name: Install_1
-        uses: actions/setup-node@v3
-        with: 
-           version: 10.x
-           
-      - name: Install_npm
-        run: npm install
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 14
+      - run: npm install
+      - run: npm test
 
       - name: Install_lcov
         shell: bash
