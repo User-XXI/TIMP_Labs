@@ -24,7 +24,7 @@ jobs:
       - name: Install_lcov
         shell: bash
         run: | 
-            sudo apt install lcov && mkdir coverage
+            sudo apt install lcov && mkdir coverage && touch ./coverage/lcov.info
    
       
       - name: Coveralls
