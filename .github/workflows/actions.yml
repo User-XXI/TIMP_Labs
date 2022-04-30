@@ -21,20 +21,17 @@ jobs:
         run : git pull origin lab05_master
     
 
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 14
-      - run: npm install
-
-      - name: Install_lcov
-        shell: bash
-        run: | 
-            sudo apt install lcov && mkdir coverage && touch ./coverage/lcov.info
-   
-      
-      - name: Coveralls
+      - name: CovBeg
         uses: coverallsapp/github-action@master
         with:
-          name: code-coverage-report
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.github_token }}
+          parallel: true
+          path-to-lcov: ./_built/lcov.info
+          coveralls-endpoint: https://coveralls.io
+
+      - name: CovFin
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.github_token }}
+          parallel-finished: true
+
