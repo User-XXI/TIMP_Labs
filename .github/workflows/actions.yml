@@ -1,23 +1,33 @@
-name: Banking
-
+name: 'lab05-actions'
 on:
-  push:
-      branches: 
-      - lab05_master
-    
+   push:
+     branches:
+       - lab05_master
       
 jobs:
-  BuildProject:
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v2
-
-        - name: build banking
-          shell: bash
-          run: |
-            cd banking
-            cmake -H. -B_built
-            cmake --build _built
+  build:
+    runs-on: ubuntu-latest
+  
+    steps:      
+      - name: Git clone
+        uses: actions/checkout@v1 
+        
+      - name: Git checkout
+        run : git checkout lab05_master
+        
+      - name: Git pull
+        run : git pull origin lab05_master
+        
+    
+    
+      - name: Test
+        shell: bash
+        run: |
+          cmake -H. -B_build -DBUILD_TESTS=O
+          cmake --build _build
+          cmake --build _build --target test
+          _build/check
+          cmake --build _build --target test -- ARGS=--verbose
           
   Testing:
     runs-on: ubuntu-latest
