@@ -28,39 +28,12 @@ jobs:
           cmake --build _build --target test
           _build/check
           cmake --build _build --target test -- ARGS=--verbose
-          
-  Testing:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      
-      - name: update
-        run:  |
-          git submodule update --init
-          sudo apt install lcov
-          sudo apt install g++-7
-      
-      - name: test
-        shell: bash
-        run: |
-          mkdir _built && cd _built
-          CXX=/usr/bin/g++-7 cmake -DCOVERAGE=1 ..
-          cmake --build .
-          
-          lcov -t "banking" -o lcov.info -c -d .
-          
+     
 
- 
-      - name: Test ${{ matrix.test_number }}
-        run: make test-coverage-${{ matrix.test_number }}
-      - name: Coveralls Parallel
+      - name: Coveralls
         uses: coverallsapp/github-action@master         
         with:
           github-token: ${{ secrets.github_token }}
           flag-name: run-${{ matrix.test_number }}
-          
-      - name: Coveralls Finished
-        uses: coverallsapp/github-action@master
-        with:
-          github-token: ${{ secrets.github_token }}
+
        
