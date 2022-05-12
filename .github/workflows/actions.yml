@@ -3,7 +3,8 @@ name: Banking
 on:
   push:
       branches: 
-      - Master
+      - lab05_master
+    
       
 jobs:
   BuildProject:
