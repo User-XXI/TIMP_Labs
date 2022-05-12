@@ -1,37 +1,44 @@
-
-name: 'lab05-actions'
+name: Banking
 
 on:
-   push:
-     branches:
-       - lab05_master
+  push:
+      branches: 
+      - Master
       
 jobs:
-  build:
+
+  BuildProject:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v2
+
+        - name: build banking
+          shell: bash
+          run: |
+            cd banking
+            cmake -H. -B_built
+            cmake --build _built
+          
+  Testing:
     runs-on: ubuntu-latest
-  
-    steps:      
-      - name: Git clone
-        uses: actions/checkout@v1 
-        
-      - name: Git checkout
-        run : git checkout lab05_master
-        
-      - name: Git pull
-        run : git pull origin lab05_master
-        
-    
-    
-      - name: Test
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: update
+        run:  |
+          git submodule update --init
+          sudo apt install lcov
+          sudo apt install g++-7
+      
+      - name: test
         shell: bash
         run: |
-          cmake -H. -B_build -DBUILD_TESTS=O
-          cmake --build _build
-          cmake --build _build --target test
-          _build/check
-          cmake --build _build --target test -- ARGS=--verbose
-       
-
+          mkdir _built && cd _built
+          CXX=/usr/bin/g++-7 cmake -DCOVERAGE=1 ..
+          cmake --build .
+          ./RunTest
+          lcov -t "banking" -o lcov.info -c -d .
+          
       - name: CovBeg
         uses: coverallsapp/github-action@master
         with:
@@ -45,4 +52,3 @@ jobs:
         with:
           github-token: ${{ secrets.github_token }}
           parallel-finished: true
-
