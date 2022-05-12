@@ -6,7 +6,6 @@ on:
       - Master
       
 jobs:
-
   BuildProject:
       runs-on: ubuntu-latest
       steps:
