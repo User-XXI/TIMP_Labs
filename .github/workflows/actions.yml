@@ -7,7 +7,7 @@ on:
       
 jobs:
 
-  BuildProject:
+  Build:
       runs-on: ubuntu-latest
       steps:
         - uses: actions/checkout@v2
@@ -15,7 +15,6 @@ jobs:
         - name: build banking
           shell: bash
           run: |
-            cd banking
             cmake -H. -B_build
             cmake --build _build
           
@@ -40,7 +39,7 @@ jobs:
           lcov --remove lcov.info '/home/runner/work/lab05/lab05/third-party/gtest/*' -o lcov.info
           lcov --remove lcov.info '/usr/include/*' -o lcov.info
           
-  Testing_Coverall:
+  CovTest:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
