@@ -1,4 +1,4 @@
-## Laboratory work IV
+# Laboratory work IV
 
 Данная лабораторная работа посвещена изучению систем непрерывной интеграции на примере сервиса **[GitHub Actions](https://github.com/features/actions)**
 
