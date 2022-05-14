@@ -37,7 +37,8 @@ jobs:
           cmake --build .
           ./RunTest
           lcov -t "banking" -o lcov.info -c -d .
-
+          lcov --remove lcov.info '/home/runner/work/TIMP_Labs/TIMP_Labs/third-party/gtest/*' -o lcov.info
+          lcov --remove lcov.info '/usr/include/*' -o lcov.info
           
   CovTest:
     runs-on: ubuntu-latest
@@ -58,7 +59,8 @@ jobs:
           cmake --build .
           ./RunTest
           lcov -t "banking" -o lcov.info -c -d .
-
+          lcov --remove lcov.info '/home/runner/work/TIMP_Labs/TIMP_Labs/third-party/gtest/*' -o lcov.info ###
+          lcov --remove lcov.info '/usr/include/*' -o lcov.info
           
       - name: CovBeg
         uses: coverallsapp/github-action@master
