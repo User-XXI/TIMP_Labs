@@ -1,35 +1,77 @@
-name: 'lab05-actions'
+name: Lab05_test
+
 on:
-   push:
-     branches:
-       - lab05_master
+  push:
+      branches: 
+      - lab05_master
       
 jobs:
-  build:
+
+  BuildProject:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v2
+
+        - name: build banking
+          shell: bash
+          run: |
+            cd banking
+            cmake -H. -B_build
+            cmake --build _build
+          
+  Testing:
     runs-on: ubuntu-latest
-  
-    steps:      
-      - name: Git clone
-        uses: actions/checkout@v1 
-        
-      - name: Git checkout
-        run : git checkout lab05_master
-        
-      - name: Git pull
-        run : git pull origin lab05_master
-        
-    
-      - name: Test
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: update
+        run:  |
+          git submodule update --init
+          sudo apt install lcov
+          sudo apt install g++-7
+      - name: test
         shell: bash
         run: |
-          cmake -H. -B_build -DBUILD_TESTS=O
-          cmake --build _build
-          cmake --build _build --target test
-          _build/check
-          cmake --build _build --target test -- ARGS=--verbose
-     
-
-      - name: Coveralls
-        uses: coverallsapp/github-action@master         
+          mkdir _build && cd _build
+          CXX=/usr/bin/g++-7 cmake -DCOVERAGE=1 ..
+          cmake --build .
+          ./RunTest
+          lcov -t "banking" -o lcov.info -c -d .
+          lcov --remove lcov.info '/home/runner/work/lab05/lab05/third-party/gtest/*' -o lcov.info
+          lcov --remove lcov.info '/usr/include/*' -o lcov.info
+          
+  Testing_Coverall:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: update
+        run:  |
+          git submodule update --init
+          sudo apt install lcov
+          sudo apt install g++-7
+      
+      - name: test
+        shell: bash
+        run: |
+          mkdir _build && cd _build
+          CXX=/usr/bin/g++-7 cmake -DCOVERAGE=1 ..
+          cmake --build .
+          ./RunTest
+          lcov -t "banking" -o lcov.info -c -d .
+          lcov --remove lcov.info '/home/runner/work/lab05/lab05/third-party/gtest/*' -o lcov.info ###
+          lcov --remove lcov.info '/usr/include/*' -o lcov.info
+          
+      - name: CovBeg
+        uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.github_token }}
+          parallel: true
+          path-to-lcov: ./_build/lcov.info
+          coveralls-endpoint: https://coveralls.io
+
+      - name: CovFin
+        uses: coverallsapp/github-action@master
+        with:
+         github-token: ${{ secrets.github_token }}
+         parallel-finished: true
