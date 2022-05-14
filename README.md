@@ -23,38 +23,6 @@ remote: Total 24063 (delta 286), reused 368 (delta 230), pack-reused 23542
 Получение объектов: 100% (24063/24063), 10.23 МиБ | 2.48 МиБ/с, готово.
 Определение изменений: 100% (17674/17674), готово.
 ```
-Выбираем версию
-```shell
-$ cd third-party/gtest && git checkout release-1.11.0 && cd ../..
-
-Note: switching to 'release-1.11.0'.
-
-You are in 'detached HEAD' state. You can look around, make experimental
-changes and commit them, and you can discard any commits you make in this
-state without impacting any branches by switching back to a branch.
-
-If you want to create a new branch to retain commits you create, you may
-do so (now or later) by using -c with the switch command. Example:
-
-  git switch -c <new-branch-name>
-
-Or undo this operation with:
-
-  git switch -
-
-Turn off this advice by setting config variable advice.detachedHead to false
-
-HEAD сейчас на e2239ee6 Googletest export
-```
-```shell
-$ git add third-party/gtest
-$ git commit -m "Created third-party/gtest"
-
-[lab05_master 4dfb41d] Created third-party/gtest
- 2 files changed, 4 insertions(+)
- create mode 100644 .gitmodules
- create mode 160000 third-party/gtest
-```
 
 ```sh
 $ cmake -H. -B_build -DBUILD_TESTS=ON
@@ -162,40 +130,7 @@ Running main() from /home/andrey/User-XXI/workspace/projects/TIMP_Labs/third-par
 [==========] 5 tests from 2 test suites ran. (0 ms total)
 [  PASSED  ] 5 tests.
 ```
-.yml
-```yml
 
-name: 'lab05-actions'
-
-on:
-   push:
-     branches:
-       - lab05_master
-      
-jobs:
-  build:
-    runs-on: ubuntu-latest
-  
-    steps:      
-      - name: Git clone
-        uses: actions/checkout@v1 
-        
-      - name: Git checkout
-        run : git checkout lab05_master
-        
-      - name: Git pull
-        run : git pull origin lab05_master
-    
-      - name: Test
-        shell: bash
-        run: |
-          cmake -H. -B_build -DBUILD_TESTS=O
-          cmake --build _build
-          cmake --build _build --target test
-          _build/check
-          cmake --build _build --target test -- ARGS=--verbose
-       
-```
 ### Задание
 1. Создайте `CMakeList.txt` для библиотеки *banking*.
 2. Создайте модульные тесты на классы `Transaction` и `Account`.
@@ -203,7 +138,7 @@ jobs:
    * Покрытие кода должно составлять 100%.
 3. Настройте сборочную процедуру на **TravisCI**.
 4. Настройте [Coveralls.io](https://coveralls.io/).
-5. Проверить собирается ли файл ... `.gcov`, нужен флаг `--coverage` в `CmakeLists`
+
 
 ## Links
 
