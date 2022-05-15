@@ -1,8 +1,6 @@
 name: RPM_PACKAGE
 on:
  push:
-   branches: 
-   - lab06_master
    tags:
    - "*rpm_v*"
 jobs:
