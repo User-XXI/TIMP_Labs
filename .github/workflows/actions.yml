@@ -2,8 +2,7 @@ name: Lab05_test
 
 on:
   push:
-      branches: 
-      - lab05_master
+
       
 jobs:
 
