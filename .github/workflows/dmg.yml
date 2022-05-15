@@ -3,7 +3,7 @@ on:
  push:
    branches: 
    - lab06_master
-  tags:
+   tags:
    - "*dmg_v*"
 jobs:
  build_and_release_dmg:
