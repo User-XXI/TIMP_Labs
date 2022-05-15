@@ -1,3 +1,5 @@
+[![DEB](https://github.com/User-XXI/TIMP_Labs/actions/workflows/actions.yml/badge.svg?branch=lab06_master)](https://github.com/User-XXI/TIMP_Labs/actions/workflows/actions.yml)
+
 ## Laboratory work VI
 
 Данная лабораторная работа посвещена изучению средств пакетирования на примере **CPack**
