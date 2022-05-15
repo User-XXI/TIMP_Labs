@@ -1,48 +1,111 @@
-# **Laboratory work XII**
+## Laboratory work XI
 
-# РЕДАКТИРОВАНИЕ ФАЙЛА В VIM
+Данная лабораторная работа посвещена изучению процесса создания сеансов совместной разработки с использованием инструмента **ngrok**
 
-Чтобы открыть файл выполните:
+```sh
+$ open https://ngrok.com/
+```
 
-```bash
-$ vim имя_файла
+## Tasks
+
+- [ ] 1. Ознакомиться со ссылками учебного материала
+- [ ] 2. Выполнить инструкцию учебного материала
+- [ ] 3. Составить отчет и отправить ссылку личным сообщением в **Slack**
+
+## Tutorial
+
+```sh
+$ cd ~
+$ mkdir install
+$ mkdir tmp
+$ export HOME_PREFIX=`pwd`/install
+$ echo $HOME_PREFIX
+$ export USERNAME=`whoami`
+```
+
+```sh
+$ cd tmp
+```
+
+```sh
+$ wget https://github.com/libevent/libevent/releases/download/release-2.1.8-stable/libevent-2.1.8-stable.tar.gz
+$ tar -xvzf libevent-2.1.8-stable.tar.gz
+$ cd libevent-2.1.8-stable
+$ ./configure --prefix=${HOME_PREFIX}
+$ make && make install
+$ cd ..
+```
+
+```sh
+$ wget http://invisible-island.net/datafiles/release/ncurses.tar.gz
+$ tar -xvzf ncurses.tar.gz
+$ cd ncurses-5.9
+$ ./configure --prefix=${HOME_PREFIX}
+$ make && make install
+$ cd ..
 ```
 
 
-Для переключения в режим редактирования используются такие команды:
+```sh
+$ wget https://github.com/tmux/tmux/releases/download/2.5/tmux-2.5.tar.gz
+$ tar -xvzf tmux-2.5.tar.gz
+$ cd tmux-2.5
+$ ./configure --prefix=${HOME_PREFIX} CFLAGS="-I${HOME_PREFIX}/include -I${HOME_PREFIX}/include/ncurses" LDFLAGS="-L${HOME_PREFIX}/lib"
+$ make && make install
+$ cd ..
+```
 
-`i` - вставить текст с позиции курсора, символ под курсором будет заменен;
+```sh
+$ wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip
+$ unizp ngrok-stable-linux-amd64.zip
+$ mv ngrok ${HOME_PREFIX}/bin
+```
 
-`I` - вставить текст в начало строки;
+```sh
+$ export LD_LIBRARY_PATH=${HOME_PREFIX}/lib
+$ export PATH="${HOME_PREFIX}/bin:${PATH}"
+$ tmux
+```
 
-`a` - добавить текст начиная от позиции курсора;
+```sh
+$ cd ~
+$ rm -rf tmp install
+```
 
-`o` - вставить новую строку после этой и начать редактирование;
+```sh
+$ brew install tmux ngrok # or use linuxbrew 🎉
+```
 
-`O` - вставить новую строку перед этой и начать редактирование;
+```sh
+$ tmux new -s session_with_group
+```
 
-`r` - заменить текущий символ;
+```sh
+# Alisa:
+$ open https://ngrok.com/signup
+$ export NGROK_TOKEN=<токен>
+$ ngrok authtoken ${NGROK_TOKEN}
+$ ngrok tcp 22
+<порт_ngrok_сервера>
+```
 
-`R` - заменить несколько символов.
+```sh
+# Bob:
+$ ssh ${USERNAME}@0.tcp.ngrok.io -p<порт_ngrok_сервера>
+<пароль_от_учетной_записи>
+$ tmux a -t session_with_group
+$ <C-B>"
+```
 
-Командная строка Vim запускается в командном режиме нажатием двоеточия - `:`. Наиболее часто используемые команды редактора vim:
+## Report
 
-`:w` - сохранить файл;
-
-`:q` - закрыть редактор;
-
-`:q!` - закрыть редактор без сохранения;
-
-`:r!` - выполнить команду оболочки и вставить ответ в редактор;
-
-`:set <переменная=значение>` - установить значение переменной, например, tabstop=4, или set number, с помощью этой команды можно управлять многими аспектами работы vim.
-
-`:buffers` - посмотреть открытые файлы.
-
-## Links
-
-- [Vim podcast](http://vimcasts.org/)
-- [Neovim](https://neovim.io/doc/user/)
-- [Vim Викиучебник](https://ru.wikibooks.org/wiki/Vim)
-- [Vim](https://github.com/vim/vim)
-
+```sh
+$ cd ~/workspace/
+$ export LAB_NUMBER=11
+$ git clone https://github.com/tp-labs/lab${LAB_NUMBER}.git tasks/lab${LAB_NUMBER}
+$ mkdir reports/lab${LAB_NUMBER}
+$ cp tasks/lab${LAB_NUMBER}/README.md reports/lab${LAB_NUMBER}/REPORT.md
+$ cd reports/lab${LAB_NUMBER}
+$ edit REPORT.md
+$ gist REPORT.md
+```
