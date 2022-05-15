@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.12)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 option(CPACK_GENERATOR_DEB OFF)
@@ -10,6 +10,8 @@ option(CPACK_GENERATOR_DMG OFF)
 
 project(solver)
 
+
+##############
 
 add_executable(solver equation.cpp)
 
@@ -26,6 +28,7 @@ if(CPACK_GENERATOR_RPM)
 	set(CPACK_GENERATOR "RPM")
 endif()
 
+#########
 if(CPACK_GENERATOR_DEB)
     set(CPACK_DEBIAN_PACKAGE_MAINTAINER "name")
 	set(CPACK_GENERATOR "DEB")
@@ -42,3 +45,4 @@ unset(CPACK_GENERATOR_RPM CACHE)
 unset(CPACK_GENERATOR_DEB CACHE)
 unset(CPACK_GENERATOR_MSI CACHE)
 unset(CPACK_GENERATOR_DMG CACHE)
+

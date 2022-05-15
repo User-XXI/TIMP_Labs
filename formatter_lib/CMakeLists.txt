@@ -1,9 +1,9 @@
-cmake_minimum_required(VERSION 3.4)
-project (lab03)
+cmake_minimum_required(VERSION 3.12)
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_library(formatter STATIC ${CMAKE_CURRENT_SOURCE_DIR}/formatter.cpp)
+project(formatter)
 
-include_directories()
+add_library(formatter STATIC formatter.cpp)
+
