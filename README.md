@@ -6,29 +6,24 @@
 $ open https://www.vagrantup.com/intro/index.html
 ```
 
-## Tasks
-
-- [ ] 1. Ознакомиться со ссылками учебного материала
-- [ ] 2. Выполнить инструкцию учебного материала
-- [ ] 3. Составить отчет и отправить ссылку личным сообщением в **Slack**
-
-## Tutorial
-
 ```sh
-$ export GITHUB_USERNAME=<имя_пользователя>
-$ export PACKAGE_MANAGER=<пакетный_менеджер>
-```
-
-```sh
-$ cd ${GITHUB_USERNAME}/workspace
-$ ${PACKAGE_MANAGER} install vagrant
-```
-
-```sh
+$ dnf install vagrant
 $ vagrant version
-$ vagrant init bento/ubuntu-19.10
+```
+<details>
+
+```
+Installed Version: 2.2.19
+
+Vagrant was unable to check for the latest version of Vagrant.
+Please check manually at https://www.vagrantup.com
+```
+</details>
+
+```bash
+$ vagrant init bento/ubuntu-22.04
 $ less Vagrantfile
-$ vagrant init -f -m bento/ubuntu-19.10
+$ vagrant init -f -m bento/ubuntu-22.04
 ```
 
 ```sh
@@ -39,8 +34,8 @@ $ mkdir shared
 $ cat > Vagrantfile <<EOF
 \$script = <<-SCRIPT
 sudo apt install docker.io -y
-sudo docker pull fastide/ubuntu:19.04
-sudo docker create -ti --name fastide fastide/ubuntu:19.04 bash
+sudo docker pull fastide/ubuntu:22.04
+sudo docker create -ti --name fastide fastide/ubuntu:22.04 bash
 sudo docker cp fastide:/home/developer /home/
 sudo useradd developer
 sudo usermod -aG sudo developer
