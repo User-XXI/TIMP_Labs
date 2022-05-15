@@ -1,8 +1,6 @@
 name: MSI_PACKAGE
 on:
  push:
-   branches: 
-   - lab06_master
    tags:
    - "*msi_v*"
 jobs:
