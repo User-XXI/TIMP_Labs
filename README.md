@@ -1,5 +1,4 @@
-[![DEB](https://github.com/User-XXI/TIMP_Labs/actions/workflows/actions.yml/badge.svg?branch=lab06_master)](https://github.com/User-XXI/TIMP_Labs/actions/workflows/actions.yml)
-
+[![RPM_PACKAGE](https://github.com/User-XXI/TIMP_Labs/actions/workflows/rpm.yml/badge.svg?branch=lab06_master)](https://github.com/User-XXI/TIMP_Labs/actions/workflows/rpm.yml)
 
 ## Laboratory work VI
 
