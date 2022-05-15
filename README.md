@@ -139,7 +139,3 @@ $ gist REPORT.md
 - [Vagrant vbguest plugin](https://github.com/dotless-de/vagrant-vbguest)
 - [Vagrant disksize plugin](https://github.com/sprotheroe/vagrant-disksize)
 - [Vagrant vmware esxi plugin](https://github.com/josenk/vagrant-vmware-esxi)
-
-```
-Copyright (c) 2015-2021 The ISC Authors
-```
