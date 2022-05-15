@@ -1,8 +1,6 @@
 name: DEB_PACKAGE
 on: 
  push:
-   branches: 
-   - lab06_master
    tags:
    - "*deb_v*"
 jobs:
