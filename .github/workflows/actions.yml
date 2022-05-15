@@ -1,9 +1,7 @@
 name: 'lab04-actions'
 on:
   push:
-    branches:
-      - lab04_master
-      
+
 jobs:
   build:
     runs-on: ubuntu-latest
