@@ -1,0 +1,37 @@
+name: MSI_PACKAGE
+on: 
+ push:
+  tags:
+   - "*msi_v*"
+jobs:
+ build_and_release_msi:
+  runs-on: windows-latest
+  steps:
+   - name: checkout
+     uses: actions/checkout@master
+   - name: build_package
+     run: |
+      cd solver_application
+      cmake -DCPACK_GENERATOR_WIX=ON -B ./solver_output
+      cd solver_output
+      cpack -C CPackConfig.cmake -G "WIX"
+   - name: Create Release
+     id: create_release
+     uses: actions/create-release@v1
+     env:
+       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+     with:
+       tag_name: ${{ github.ref }}
+       release_name: Release ${{ github.ref }}
+       draft: false
+       prerelease: false
+   - name: Upload Release Asset
+     id: upload-release-asset
+     uses: actions/upload-release-asset@v1
+     env:
+       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+     with:
+       upload_url: ${{ steps.create_release.outputs.upload_url }}
+       asset_path: solver_application/solver_output/solver-0.1.1-win64.msi
+       asset_name: solver.msi
+       asset_content_type: application/msi
