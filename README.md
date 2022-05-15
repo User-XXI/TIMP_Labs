@@ -1,9 +1,9 @@
-## Laboratory work XI
+## Laboratory work X
 
-Данная лабораторная работа посвещена изучению процесса создания сеансов совместной разработки с использованием инструмента **ngrok**
+Данная лабораторная работа посвещена изучению процесса создания и конфигурирования виртуальной среды разработки с использованием **Vagrant**
 
 ```sh
-$ open https://ngrok.com/
+$ open https://www.vagrantup.com/intro/index.html
 ```
 
 ## Tasks
@@ -15,97 +15,131 @@ $ open https://ngrok.com/
 ## Tutorial
 
 ```sh
-$ cd ~
-$ mkdir install
-$ mkdir tmp
-$ export HOME_PREFIX=`pwd`/install
-$ echo $HOME_PREFIX
-$ export USERNAME=`whoami`
+$ export GITHUB_USERNAME=<имя_пользователя>
+$ export PACKAGE_MANAGER=<пакетный_менеджер>
 ```
 
 ```sh
-$ cd tmp
+$ cd ${GITHUB_USERNAME}/workspace
+$ ${PACKAGE_MANAGER} install vagrant
 ```
 
 ```sh
-$ wget https://github.com/libevent/libevent/releases/download/release-2.1.8-stable/libevent-2.1.8-stable.tar.gz
-$ tar -xvzf libevent-2.1.8-stable.tar.gz
-$ cd libevent-2.1.8-stable
-$ ./configure --prefix=${HOME_PREFIX}
-$ make && make install
-$ cd ..
+$ vagrant version
+$ vagrant init bento/ubuntu-19.10
+$ less Vagrantfile
+$ vagrant init -f -m bento/ubuntu-19.10
 ```
 
 ```sh
-$ wget http://invisible-island.net/datafiles/release/ncurses.tar.gz
-$ tar -xvzf ncurses.tar.gz
-$ cd ncurses-5.9
-$ ./configure --prefix=${HOME_PREFIX}
-$ make && make install
-$ cd ..
-```
-
-
-```sh
-$ wget https://github.com/tmux/tmux/releases/download/2.5/tmux-2.5.tar.gz
-$ tar -xvzf tmux-2.5.tar.gz
-$ cd tmux-2.5
-$ ./configure --prefix=${HOME_PREFIX} CFLAGS="-I${HOME_PREFIX}/include -I${HOME_PREFIX}/include/ncurses" LDFLAGS="-L${HOME_PREFIX}/lib"
-$ make && make install
-$ cd ..
+$ mkdir shared
 ```
 
 ```sh
-$ wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip
-$ unizp ngrok-stable-linux-amd64.zip
-$ mv ngrok ${HOME_PREFIX}/bin
+$ cat > Vagrantfile <<EOF
+\$script = <<-SCRIPT
+sudo apt install docker.io -y
+sudo docker pull fastide/ubuntu:19.04
+sudo docker create -ti --name fastide fastide/ubuntu:19.04 bash
+sudo docker cp fastide:/home/developer /home/
+sudo useradd developer
+sudo usermod -aG sudo developer
+echo "developer:developer" | sudo chpasswd
+sudo chown -R developer /home/developer
+SCRIPT
+EOF
 ```
 
 ```sh
-$ export LD_LIBRARY_PATH=${HOME_PREFIX}/lib
-$ export PATH="${HOME_PREFIX}/bin:${PATH}"
-$ tmux
+$ cat >> Vagrantfile <<EOF
+
+Vagrant.configure("2") do |config|
+
+  config.vagrant.plugins = ["vagrant-vbguest"]
+EOF
 ```
 
 ```sh
-$ cd ~
-$ rm -rf tmp install
+$ cat >> Vagrantfile <<EOF
+
+  config.vm.box = "bento/ubuntu-19.10"
+  config.vm.network "public_network"
+  config.vm.synced_folder('shared', '/vagrant', type: 'rsync')
+
+  config.vm.provider "virtualbox" do |vb|
+    vb.gui = true
+    vb.memory = "2048"
+  end
+
+  config.vm.provision "shell", inline: \$script, privileged: true
+
+  config.ssh.extra_args = "-tt"
+
+end
+EOF
 ```
 
 ```sh
-$ brew install tmux ngrok # or use linuxbrew 🎉
+$ vagrant validate
+
+$ vagrant status
+$ vagrant up # --provider virtualbox
+$ vagrant port
+$ vagrant status
+$ vagrant ssh
+
+$ vagrant snapshot list
+$ vagrant snapshot push
+$ vagrant snapshot list
+$ vagrant halt
+$ vagrant snapshot pop
+```
+
+```ruby
+  config.vm.provider :vmware_esxi do |esxi|
+
+    esxi.esxi_hostname = '<exsi_hostname>'
+    esxi.esxi_username = 'root'
+    esxi.esxi_password = 'prompt:'
+
+    esxi.esxi_hostport = 22
+
+    esxi.guest_name = '${GITHUB_USERNAME}'
+
+    esxi.guest_username = 'vagrant'
+    esxi.guest_memsize = '2048'
+    esxi.guest_numvcpus = '2'
+    esxi.guest_disk_type = 'thin'
+  end
 ```
 
 ```sh
-$ tmux new -s session_with_group
-```
-
-```sh
-# Alisa:
-$ open https://ngrok.com/signup
-$ export NGROK_TOKEN=<токен>
-$ ngrok authtoken ${NGROK_TOKEN}
-$ ngrok tcp 22
-<порт_ngrok_сервера>
-```
-
-```sh
-# Bob:
-$ ssh ${USERNAME}@0.tcp.ngrok.io -p<порт_ngrok_сервера>
-<пароль_от_учетной_записи>
-$ tmux a -t session_with_group
-$ <C-B>"
+$ vagrant plugin install vagrant-vmware-esxi
+$ vagrant plugin list
+$ vagrant up --provider=vmware_esxi
 ```
 
 ## Report
 
 ```sh
 $ cd ~/workspace/
-$ export LAB_NUMBER=11
+$ export LAB_NUMBER=10
 $ git clone https://github.com/tp-labs/lab${LAB_NUMBER}.git tasks/lab${LAB_NUMBER}
 $ mkdir reports/lab${LAB_NUMBER}
 $ cp tasks/lab${LAB_NUMBER}/README.md reports/lab${LAB_NUMBER}/REPORT.md
 $ cd reports/lab${LAB_NUMBER}
 $ edit REPORT.md
 $ gist REPORT.md
+```
+
+## Links
+
+- [VirualBox](https://www.virtualbox.org/)
+- [Vagrant providers](https://github.com/hashicorp/vagrant/wiki/Available-Vagrant-Plugins#providers)
+- [Vagrant vbguest plugin](https://github.com/dotless-de/vagrant-vbguest)
+- [Vagrant disksize plugin](https://github.com/sprotheroe/vagrant-disksize)
+- [Vagrant vmware esxi plugin](https://github.com/josenk/vagrant-vmware-esxi)
+
+```
+Copyright (c) 2015-2021 The ISC Authors
 ```
