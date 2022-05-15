@@ -1,6 +1,8 @@
 name: DMG_PACKAGE
-on: 
+on:
  push:
+   branches: 
+   - lab06_master
   tags:
    - "*dmg_v*"
 jobs:
