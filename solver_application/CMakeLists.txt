@@ -1,23 +1,34 @@
-cmake_minimum_required(VERSION 3.4) 
-project(lab03_3)
+cmake_minimum_required(VERSION 3.12)
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_library(solver STATIC ${CMAKE_CURRENT_SOURCE_DIR}/equation.cpp)
-add_library(solver_lib STATIC ${CMAKE_CURRENT_SOURCE_DIR} "../solver_lib/solver.cpp")
-add_library(formatter_ex STATIC ${CMAKE_CURRENT_SOURCE_DIR} "../formatter_ex_lib/formatter_ex.cpp")
+option(CPACK_GENERATOR_DEB OFF)
 
-add_library(solver_application ${CMAKE_CURRENT_SOURCE_DIR}/equation.cpp)
+project(solver)
 
-include_directories("../formatter_ex_lib")
-include_directories("../formatter_lib")
-include_directories("../solver_lib")
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/stdexcept)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/cmath)
 
-target_link_libraries(solver formatter_ex)
-target_link_libraries(formatter_ex formatter_lib)
-target_link_libraries(solver "../solver_lib")
-target_link_libraries(solver_application solver_lib)
+add_executable(solver equation.cpp)
+
+include_directories(../formatter_ex_lib ../solver_lib)
+
+add_subdirectory(../formatter_ex_lib formatter_ex)
+add_subdirectory(../solver_lib solver_lib)
+
+target_link_libraries(solver formatter_ex solver_lib)
+
+install(TARGETS solver RUNTIME DESTINATION bin)
+set(CPACK_SOURCE_GENERATOR "TGZ;ZIP")
+
+if(CPACK_GENERATOR_DEB)
+    set(CPACK_DEBIAN_PACKAGE_MAINTAINER "name")
+	set(CPACK_GENERATOR "DEB")
+endif()
+
+if(CPACK_GENERATOR_DMG)
+	set(MACOSX_BUNDLE TRUE)
+	set(CPACK_GENERATOR "DragNDrop")
+endif()
+
+include(CPack)
+unset(CPACK_GENERATOR_DEB CACHE)
