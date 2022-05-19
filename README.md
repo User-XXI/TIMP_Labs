@@ -1,4 +1,4 @@
-[![Lab05_test](https://github.com/User-XXI/TIMP_Labs/actions/workflows/actions.yml/badge.svg?branch=lab05_master)](https://github.com/User-XXI/TIMP_Labs/actions/workflows/actions.yml)
+[![Lab05_test](https://github.com/User-XXI/TIMP_Labs/actions/workflows/actions.yml/badge.svg?branch=lab05_master)](https://github.com/User-XXI/TIMP_Labs/actions/workflows/actions.yml?branch=lab05_master)
 [![Coverage Status](https://coveralls.io/repos/github/User-XXI/TIMP_Labs/badge.svg?branch=lab05_master)](https://coveralls.io/github/User-XXI/TIMP_Labs?branch=lab05_master)
 
 ## Laboratory work V
