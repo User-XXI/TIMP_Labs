@@ -8,7 +8,9 @@ jobs:
   
     steps:      
       - name: Git clone
-        uses: actions/checkout@v1 
+        uses: actions/checkout@v3
+        with:
+          ref: lab04_master
         
       - name: Git checkout
         run : git checkout lab04_master
