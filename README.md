@@ -1,4 +1,4 @@
-[![Lab04_test](https://github.com/User-XXI/TIMP_Labs/actions/workflows/actions.yml/badge.svg?branch=lab04_master)](https://github.com/User-XXI/TIMP_Labs/actions/workflows/actions.yml?branch=lab04_master)
+[![lab04-actions](https://github.com/User-XXI/TIMP_Labs/actions/workflows/lab04_actions.yml/badge.svg?branch=lab04_master)](https://github.com/User-XXI/TIMP_Labs/actions/workflows/lab04_actions.yml)
 # Laboratory work IV
 
 Данная лабораторная работа посвещена изучению систем непрерывной интеграции на примере сервиса **[GitHub Actions](https://github.com/features/actions)**
